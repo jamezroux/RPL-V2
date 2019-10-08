@@ -89,17 +89,17 @@ The four cells are represented by binary numbers 0-3 in a three digit binary num
 ## Hello World
 ```
 VER 1.0
-011 PUS 001000100 // D
-010 PUS 001001100 // L
-009 PUS 001010010 // R
-008 PUS 001001111 // O
-007 PUS 001010111 // W
+001 PUS 001000100 // D
+002 PUS 001001100 // L
+003 PUS 001010010 // R
+004 PUS 001001111 // O
+005 PUS 001010111 // W
 006 PUS 000100000 // Space
-005 PUS 001001111 // O
-004 PUS 001001100 // L
-003 PUS 001001100 // L
-002 PUS 001000110 // E
-001 PUS 001010000 // H
+007 PUS 001001111 // O
+008 PUS 001001100 // L
+009 PUS 001001100 // L
+010 PUS 001000110 // E
+011 PUS 001010000 // H
 
 This function checks if theres data on the current stack,
 prints the top value as ascii if there is any and skips
