@@ -110,7 +110,6 @@ public static void main(String[] args) {
 //
 // Todo: Make the file it reads by given via user input rather than hardcoded
 // Todo: Delete all sections past '//' in the code
-
 public static void loadCode() {
         Logger loadCodeLogger = Logger.getLogger(Interpreter.class.getName());
         loadCodeLogger.log(Level.INFO, "Started loading the code.");
@@ -138,6 +137,7 @@ public static void loadCode() {
                 e.printStackTrace();
         }
 }
+
 public static void parseLine(String[] program) {
         Logger parseLineLogger = Logger.getLogger(Interpreter.class.getName());
         parseLineLogger.log(Level.INFO, "Initialized the line parser.");
