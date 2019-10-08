@@ -34,17 +34,23 @@
  | RET    | Return to last JUT                              | RET         |
 
 ## Math
- - Addition = ADD [000] [000]
- - Subtraction = SUB [000] [000]
- - Multiplication = MUL [000] [000]
- - Division = DIV [000] [000]
- - Negate top value of current cell = NEG
+
+ | OPCODE | Definition                             | Usage                                    |
+ | ------ | -------------------------------------- | ---------------------------------------- |
+ | ADD    | Add first number by second number, push result to top of stack      | ADD 000 101 |
+ | SUB    | Subtract first number by second number, push result to top of stack | SUB 000 101 |
+ | MUL    | Multiply first number by second number, push result to top of stack | MUL 000 101 |
+ | DIV    | Divide first number by second number, push result to top of stack   | DIV 000 101 |
+ | NEG    | Perform a binary negate on top value, push result to top of stack   | NEG 010     |
 
 ## Pointer
- - Pointer Move Forward = OPF
- - Pointer Move Backward = OPB
- - Pointer Move Left = OPL
- - Pointer Move Right = OPR
+
+  | OPCODE | Definition                | Usage |
+  | ------ | ------------------------- | ----- |
+  | OPF    | Move the pointer forward  | OPF   |
+  | OPB    | Move the pointer backward | OPB   |
+  | OPL    | Move the pointer left     | OPL   |
+  | OPR    | Move the pointer right    | OPR   |
 
 ## Rubik's Notation
  - CW = Clockwise
@@ -73,6 +79,7 @@
  - All data values are represented as 9 character long binary strings with the first number reserved as negate
  - All line redirects are 3 digit long integers
  - Each cell contains a stack, each stack can contain 64 values
+ - The working face is composed of 4 cells labeled 000, 001, 010, 001 in clockwise order. Make the first digit a 1 to call the negate of the stored value
 
 # Examples
 
