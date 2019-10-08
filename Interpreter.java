@@ -1,5 +1,7 @@
 /*
 
+   Title: Rubiks Programming Language
+
    Authors {
    JamezRoux
    Plexeon
@@ -12,6 +14,7 @@
    }
 
    Dates Edited {
+   10/7/2019
    10/8/2019
    }
 
@@ -20,6 +23,11 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Interpreter {
 
@@ -76,14 +84,20 @@ final static String OP_RET = "RET";
 
 // Regex patterns
 final static String CODELINE = "[0-9][0-9][0-9]";
+final static String BINARY_POSITIVE = "[0][0-1][0-1][0-1][0-1][0-1][0-1][0-1][0-1][0-1]";
+final static String BINARY_NEGATIVE = "[1][0-1][0-1][0-1][0-1][0-1][0-1][0-1][0-1][0-1]";
+final static String CELL_SELECTOR = "[0-1][0-1][0-1]";
 
 public static String[][] program = new String[999][256];
+public static String[][] refinedProgram = new String[999][256];
 
 public static void main(String[] args) {
 
         int lineNumber;
 
         loadCode();
+
+        System.out.println("Loaded Code Successfully");
 
         // This chunk here takes the program variable we just loaded up with our
         // code and iterates through each line, for each line it takes the opcodes
@@ -107,6 +121,10 @@ public static void main(String[] args) {
 
 public static void loadCode() {
 
+        Logger loadCodeLogger = Logger.getLogger(Interpreter.class.getName());
+
+        loadCodeLogger.log(Level.INFO, "Started loading the code.");
+
         try {
                 int lineNumber = 0;
                 String[] line = new String[256];
@@ -121,30 +139,53 @@ public static void loadCode() {
                         if(line[0].toString().matches(CODELINE)) {
                                 for(int code = 0; code < line.length; code++) {
                                         program[lineNumber][code] = line[code];
-                                        System.out.print("\t" + program[lineNumber][code] + "\t");
-                                } System.out.print("\n");
+                                        //loadCodeLogger.log(Level.INFO, program[lineNumber][code] + "\t");
+                                        //System.out.print("\t" + program[lineNumber][code] + "\t");
+                                }
+                                loadCodeLogger.log(Level.INFO, Arrays.toString(line));
+                                lineNumber++;
                         }
-
-                        lineNumber++;
                 }
                 scanner.close();
+
+                loadCodeLogger.log(Level.INFO, "Cleaning up the program array.");
+                //while (program = program.remove(null)) {}
+                program = Arrays.copyOf(refinedProgram, lineNumber);
+
         } catch (FileNotFoundException e) {
                 e.printStackTrace();
         }
 }
 
 public static void parseLine(String[] program) {
+
+        Logger parseLineLogger = Logger.getLogger(Interpreter.class.getName());
+
+        parseLineLogger.log(Level.INFO, "Initialized the line parser.");
+
         int segment;
+        String valueOne = "0001010010"; // 82
+        String valueTwo = "0010011011"; // 155
+        int valueOut;
 
         for(segment = 0; segment < program.length; segment++) {
                 if(program[segment] != null) {
-                        // This is where we build the catches for all the opcodes
-                        // This will be a lot of if statements for now.
-                        if(program[segment] == OP_ADD) {
-                                break;
+                        if(program[segment].toString().matches(OP_ADD)) {
+                                parseLineLogger.log(Level.INFO, "Matched OP_ADD");
+                                if(program[segment+1].toString().matches(CELL_SELECTOR) & program[segment+2].toString().matches(CELL_SELECTOR)) {
+                                        // Typically we would grab the top value from these cells then send those values over
+                                        // But for right now just testing the function so throwing some binary over
+                                        valueOne = "0b" + valueOne;
+                                        valueTwo = "0b" + valueTwo;
+                                        int valueOneInt = Integer.parseInt(valueOne.substring(2), 2);
+                                        int valueTwoInt = Integer.parseInt(valueTwo.substring(2), 2);
+                                        System.out.println("valueOne: " + valueOneInt + "\tvalueTwo: " + valueTwoInt);
+                                        valueOut = valueOneInt + valueTwoInt;
+                                        parseLineLogger.log(Level.INFO, "Value is:\t" + valueOut);
+                                } System.out.println(valueOut); // This will be changed to push value to the stack
                         }
                 }
         }
 }
 
-}
+} // End of file
