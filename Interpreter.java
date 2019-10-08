@@ -92,24 +92,16 @@ public static String[][] program = new String[999][256];
 public static String[][] refinedProgram = new String[999][256];
 
 public static void main(String[] args) {
-
         int lineNumber;
-
         loadCode();
-
         System.out.println("Loaded Code Successfully");
-
         // This chunk here takes the program variable we just loaded up with our
         // code and iterates through each line, for each line it takes the opcodes
         // and does the correct actions
         for(lineNumber = 0; lineNumber < program.length; lineNumber++) {
-
                 parseLine(program[lineNumber]);
-
         }
-
         System.exit(0);
-
 }
 
 // This method loads the code into the program variable, this makes it so that
@@ -120,22 +112,15 @@ public static void main(String[] args) {
 // Todo: Filter out the comments, no need for unneccesary data
 
 public static void loadCode() {
-
         Logger loadCodeLogger = Logger.getLogger(Interpreter.class.getName());
-
         loadCodeLogger.log(Level.INFO, "Started loading the code.");
-
         try {
                 int lineNumber = 0;
                 String[] line = new String[256];
-
                 Scanner scanner = new Scanner(new File("./test.rpl"));
-
                 while (scanner.hasNextLine()) {
-
                         line = scanner.nextLine().split(" ");
                         //System.out.println(line[0]);
-
                         if(line[0].toString().matches(CODELINE)) {
                                 for(int code = 0; code < line.length; code++) {
                                         program[lineNumber][code] = line[code];
@@ -147,27 +132,20 @@ public static void loadCode() {
                         }
                 }
                 scanner.close();
-
                 loadCodeLogger.log(Level.INFO, "Cleaning up the program array.");
                 //while (program = program.remove(null)) {}
                 program = Arrays.copyOf(refinedProgram, lineNumber);
-
         } catch (FileNotFoundException e) {
                 e.printStackTrace();
         }
 }
-
 public static void parseLine(String[] program) {
-
         Logger parseLineLogger = Logger.getLogger(Interpreter.class.getName());
-
         parseLineLogger.log(Level.INFO, "Initialized the line parser.");
-
         int segment;
         String valueOne = "0001010010"; // 82
         String valueTwo = "0010011011"; // 155
         int valueOut;
-
         for(segment = 0; segment < program.length; segment++) {
                 if(program[segment] != null) {
                         if(program[segment].toString().matches(OP_ADD)) {
