@@ -4,20 +4,23 @@
 
 ## RPL opcodes
 
+## Math
  - Addition = ADD
  - Subtraction = SUB
  - Multiplication = MUL
  - Division = DIV
  - Negate = NEG
 
+## Pointer
  - Pointer Move Forward = OPF
  - Pointer Move Backward = OPB
  - Pointer Move Left = OPL
  - Pointer Move Right = OPR
 
- - Rubik's Notation
-
+## Rubik's Notation
  - CW = Clockwise
+ - CCW = Counterclockwise
+ 
  - Move Left Face CW = MOV L
  - Move Right Face CW = MOV R
  - Move Top CW = MOV U
@@ -25,7 +28,6 @@
  - Move Face CW = MOV F
  - Move Back CW = MOV B
 
- - CCW = Counterclockwise
  - Move Left Face CCW = MOV LN
  - Move Right Face CCW = MOV RN
  - Move Top CCW = MOV UN
