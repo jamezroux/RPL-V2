@@ -6,12 +6,6 @@
 > These are 3 character control codes that let you do things
 
 ## Stack Functions
- - Push Current To Stack = PUS
- - Pop From Stack = POP
- - Pop From Stack And PUS Forward = POF
- - Pop From Stack And PUS Backward = POB
- - Pop From Stack And PUS Left = POL
- - Pop From Stack And PUS Right = POR
 
  | OPCODE | Definition                     | Usage           |
  | ------ | ------------------------------ | --------------- |
@@ -23,15 +17,21 @@
  | POR    | Pop top value, move right      | POR             |
 
 ## Print Functions
- - Print Top Of Stack As ASCII = PRN
- - Print Top Of Stack As Binary = PRB
- - Print Top Of Stack As Decimal =  PRD
+
+ | OPCODE | Definition                           | Usage |
+ | ------ | ------------------------------------ | ----- |
+ | PRN    | Print top value of stack as ASCII    | PRN   |
+ | PRB    | Print top value of stack as Binary   | PRB   |
+ | PRD    | Print top value of stack as Decimal  | PRD   |
 
 ## General Functions
- - End Program / Exit = EXT
- - Check If There's Data On The Stack = CID
- - If True, Continue; Else Jump To Specified Line = JUT
- - Return To Top Of Current Function = RET
+
+ | OPCODE | Definition                                      | Usage       |
+ | ------ | ----------------------------------------------- | ----------- |
+ | EXT    | Immediately exit the program                    | EXT         |
+ | CID    | Check if there's a value on top of the stack    | CID         |
+ | JUT    | Jump to defined line if false, continue if true | JUT 000 CID |
+ | RET    | Return to last JUT                              | RET         |
 
 ## Math
  - Addition = ADD [000] [000]
