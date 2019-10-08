@@ -13,6 +13,15 @@
  - Pop From Stack And PUS Left = POL
  - Pop From Stack And PUS Right = POR
 
+ | OPCODE | Definition                     | Usage           |
+ | ------ | ------------------------------ | --------------- |
+ | PUS    | Push defined value to stack    | PUS 000000000   |
+ | POP    | Pop top value from stack       | POP             |
+ | POF    | Pop top value, move forward    | POF             |
+ | POB    | Pop top value, move backward   | POB             |
+ | POL    | Pop top value, move left       | POL             |
+ | POR    | Pop top value, move right      | POR             |
+
 ## Print Functions
  - Print Top Of Stack As ASCII = PRN
  - Print Top Of Stack As Binary = PRB
@@ -78,7 +87,7 @@ The four cells are represented by binary numbers 0-3 in a three digit binary num
 # Code Examples
 
 ## Hello World
-
+```
 VER 1.0
 011 PUS 001000100 // D
 010 PUS 001001100 // L
@@ -101,3 +110,4 @@ variables
 013 PRN
 014 RET
 EXT
+```
