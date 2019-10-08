@@ -1,8 +1,9 @@
 # Rubik's Programming Language
 
-> Programming language based on Rubik's cubes
+> Programming language based on Rubik's cubes that operates on a 2D plane with 3D storage
 
-## RPL opcodes
+# RPL Opcodes
+> These are 3 character control codes that let you do things
 
 ## Math
  - Addition = ADD
@@ -20,7 +21,7 @@
 ## Rubik's Notation
  - CW = Clockwise
  - CCW = Counterclockwise
- 
+
  - Move Left Face CW = MOV L
  - Move Right Face CW = MOV R
  - Move Top CW = MOV U
