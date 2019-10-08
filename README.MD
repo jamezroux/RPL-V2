@@ -9,66 +9,66 @@
 
  | OPCODE | Definition                     | Usage           |
  | ------ | ------------------------------ | --------------- |
- | PUS    | Push defined value to stack    | PUS 000000000   |
- | POP    | Pop top value from stack       | POP             |
- | POF    | Pop top value, move forward    | POF             |
- | POB    | Pop top value, move backward   | POB             |
- | POL    | Pop top value, move left       | POL             |
- | POR    | Pop top value, move right      | POR             |
+ | PUS    | Push defined value to stack    | `PUS 000000000`   |
+ | POP    | Pop top value from stack       | `POP`             |
+ | POF    | Pop top value, move forward    | `POF`             |
+ | POB    | Pop top value, move backward   | `POB`             |
+ | POL    | Pop top value, move left       | `POL`             |
+ | POR    | Pop top value, move right      | `POR`             |
 
 ## Print Functions
 
  | OPCODE | Definition                           | Usage |
  | ------ | ------------------------------------ | ----- |
- | PRN    | Print top value of stack as ASCII    | PRN   |
- | PRB    | Print top value of stack as Binary   | PRB   |
- | PRD    | Print top value of stack as Decimal  | PRD   |
+ | PRN    | Print top value of stack as ASCII    | `PRN`   |
+ | PRB    | Print top value of stack as Binary   | `PRB`   |
+ | PRD    | Print top value of stack as Decimal  | `PRD`   |
 
 ## General Functions
 
  | OPCODE | Definition                                      | Usage       |
  | ------ | ----------------------------------------------- | ----------- |
- | EXT    | Immediately exit the program                    | EXT         |
- | CID    | Check if there's a value on top of the stack    | CID         |
- | JUT    | Jump to defined line if false, continue if true | JUT 000 CID |
- | RET    | Return to last JUT                              | RET         |
+ | EXT    | Immediately exit the program                    | `EXT`         |
+ | CID    | Check if there's a value on top of the stack    | `CID`         |
+ | JUT    | Jump to defined line if false, continue if true | `JUT 000 CID` |
+ | RET    | Return to last JUT                              | `RET`         |
 
 ## Math
 
  | OPCODE | Definition                             | Usage                                    |
  | ------ | -------------------------------------- | ---------------------------------------- |
- | ADD    | Add first number by second number, push result to top of stack      | ADD 000 101 |
- | SUB    | Subtract first number by second number, push result to top of stack | SUB 000 101 |
- | MUL    | Multiply first number by second number, push result to top of stack | MUL 000 101 |
- | DIV    | Divide first number by second number, push result to top of stack   | DIV 000 101 |
- | NEG    | Perform a binary negate on top value, push result to top of stack   | NEG 010     |
+ | ADD    | Add first number by second number, push result to top of stack      | `ADD 000 101` |
+ | SUB    | Subtract first number by second number, push result to top of stack | `SUB 000 101` |
+ | MUL    | Multiply first number by second number, push result to top of stack | `MUL 000 101` |
+ | DIV    | Divide first number by second number, push result to top of stack   | `DIV 000 101` |
+ | NEG    | Perform a binary negate on top value, push result to top of stack   | `NEG 010`     |
 
 ## Pointer
 
   | OPCODE | Definition                | Usage |
   | ------ | ------------------------- | ----- |
-  | OPF    | Move the pointer forward  | OPF   |
-  | OPB    | Move the pointer backward | OPB   |
-  | OPL    | Move the pointer left     | OPL   |
-  | OPR    | Move the pointer right    | OPR   |
+  | OPF    | Move the pointer forward  | `OPF`   |
+  | OPB    | Move the pointer backward | `OPB`   |
+  | OPL    | Move the pointer left     | `OPL`   |
+  | OPR    | Move the pointer right    | `OPR`   |
 
 ## Rubik's Notation
- - CW = Clockwise
- - CCW = Counterclockwise
 
- - Move Left Face CW = MOV L
- - Move Right Face CW = MOV R
- - Move Top CW = MOV U
- - Move Bottom CW = MOV D
- - Move Face CW = MOV F
- - Move Back CW = MOV B
-
- - Move Left Face CCW = MOV LN
- - Move Right Face CCW = MOV RN
- - Move Top CCW = MOV UN
- - Move Bottom CCW = MOV DN
- - Move Face CCW = MOVE FN
- - Move Back CCW = MOV BN
+  | OPCODE | Definition                      | Usage    |
+  | ------ | ------------------------------- | -------- |
+  | MOV L  | Move left face clockwise        | `MOV L`  |
+  | MOV R  | Move right face clockwise       | `MOV R`  |
+  | MOV F  | Move front face clockwise       | `MOV F`  |
+  | MOV B  | Move back face clockwise        | `MOV B`  |
+  | MOV T  | Move top face clockwise         | `MOV T`  |
+  | MOV D  | Move bottom face clockwise      | `MOV D`  |
+  |        |                                 |          |
+  | MOV LN | Move left face counterclockwise | `MOV LN` |
+  | MOV RN | Move left face counterclockwise | `MOV RN` |
+  | MOV FN | Move left face counterclockwise | `MOV FN` |
+  | MOV BN | Move left face counterclockwise | `MOV BN` |
+  | MOV TN | Move left face counterclockwise | `MOV TN` |
+  | MOV DN | Move left face counterclockwise | `MOV DN` |
 
 # Interpreter / Language Rules
 
@@ -80,6 +80,7 @@
  - All line redirects are 3 digit long integers
  - Each cell contains a stack, each stack can contain 64 values
  - The working face is composed of 4 cells labeled 000, 001, 010, 001 in clockwise order. Make the first digit a 1 to call the negate of the stored value
+ - The cube has to be in a solved state for the code to execute
 
 # Examples
 
