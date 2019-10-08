@@ -105,11 +105,11 @@ public static void main(String[] args) {
 }
 
 // This method loads the code into the program variable, this makes it so that
-// we done need to keep checking the file itself. Increases the speed of code
+// we dont need to keep checking the file itself. Increases the speed of code
 // execution
 //
 // Todo: Make the file it reads by given via user input rather than hardcoded
-// Todo: Filter out the comments, no need for unneccesary data
+// Todo: Delete all sections past '//' in the code
 
 public static void loadCode() {
         Logger loadCodeLogger = Logger.getLogger(Interpreter.class.getName());
@@ -133,7 +133,6 @@ public static void loadCode() {
                 }
                 scanner.close();
                 loadCodeLogger.log(Level.INFO, "Cleaning up the program array.");
-                //while (program = program.remove(null)) {}
                 program = Arrays.copyOf(refinedProgram, lineNumber);
         } catch (FileNotFoundException e) {
                 e.printStackTrace();
