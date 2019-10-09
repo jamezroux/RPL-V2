@@ -79,7 +79,7 @@
  - All data values are represented as 9 character long binary strings with the first number reserved as negate
  - All line redirects are 3 digit long integers
  - Each cell contains a stack, each stack can contain 64 values
- - The working face is composed of 4 cells labeled 000, 001, 010, 001 in clockwise order. Make the first digit a 1 to call the negate of the stored value
+ - The working face is composed of 4 cells labeled 000, 001, 010, 011 in left > right, top > down order. Make the first digit a 1 to call the negate of the stored value
  - The cube has to be in a solved state for the code to execute
 
 # Examples
