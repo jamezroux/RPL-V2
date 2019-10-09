@@ -7,68 +7,68 @@
 
 ## Stack Functions
 
- | OPCODE | Definition                     | Usage           |
- | ------ | ------------------------------ | --------------- |
- | PUS    | Push defined value to stack    | `PUS 000000000`   |
- | POP    | Pop top value from stack       | `POP`             |
- | POF    | Pop top value, move forward    | `POF`             |
- | POB    | Pop top value, move backward   | `POB`             |
- | POL    | Pop top value, move left       | `POL`             |
- | POR    | Pop top value, move right      | `POR`             |
+ | OPCODE | Definition                     | Usage           | Implemented |
+ | ------ | ------------------------------ | --------------- | ----------- |
+ | PUS    | Push defined value to stack    | `PUS 000000000` | Cube.PUS()  |
+ | POP    | Pop top value from stack       | `POP`           | Cube.POP()  |
+ | POF    | Pop top value, move forward    | `POF`           | No          |
+ | POB    | Pop top value, move backward   | `POB`           | No          |
+ | POL    | Pop top value, move left       | `POL`           | No          |
+ | POR    | Pop top value, move right      | `POR`           | No          |
 
 ## Print Functions
 
- | OPCODE | Definition                           | Usage |
- | ------ | ------------------------------------ | ----- |
- | PRN    | Print top value of stack as ASCII    | `PRN`   |
- | PRB    | Print top value of stack as Binary   | `PRB`   |
- | PRD    | Print top value of stack as Decimal  | `PRD`   |
+ | OPCODE | Definition                           | Usage | Implemented |
+ | ------ | ------------------------------------ | ----- | ----------- |
+ | PRN    | Print top value of stack as ASCII    | `PRN` | No          |
+ | PRB    | Print top value of stack as Binary   | `PRB` | No          |
+ | PRD    | Print top value of stack as Decimal  | `PRD` | No          |
 
 ## General Functions
 
- | OPCODE | Definition                                      | Usage       |
- | ------ | ----------------------------------------------- | ----------- |
- | EXT    | Immediately exit the program                    | `EXT`         |
- | CID    | Check if there's a value on top of the stack    | `CID`         |
- | JUT    | Jump to defined line if false, continue if true | `JUT 000 CID` |
- | RET    | Return to last JUT                              | `RET`         |
+ | OPCODE | Definition                                      | Usage         | Implemented |
+ | ------ | ----------------------------------------------- | ------------- | ----------- |
+ | EXT    | Immediately exit the program                    | `EXT`         | No          |
+ | CID    | Check if there's a value on top of the stack    | `CID`         | No          |
+ | JUT    | Jump to defined line if false, continue if true | `JUT 000 CID` | No          |
+ | RET    | Return to last JUT                              | `RET`         | No          |
 
 ## Math
 
- | OPCODE | Definition                             | Usage                                    |
- | ------ | -------------------------------------- | ---------------------------------------- |
- | ADD    | Add first number by second number, push result to top of stack      | `ADD 000 101` |
- | SUB    | Subtract first number by second number, push result to top of stack | `SUB 000 101` |
- | MUL    | Multiply first number by second number, push result to top of stack | `MUL 000 101` |
- | DIV    | Divide first number by second number, push result to top of stack   | `DIV 000 101` |
- | NEG    | Perform a binary negate on top value, push result to top of stack   | `NEG 010`     |
+ | OPCODE | Definition                             | Usage                                      | Implemented             |
+ | ------ | -------------------------------------- | ------------------------------------------ | ----------------------- |
+ | ADD    | Add first number by second number, push result to top of stack      | `ADD 000 101` | Interpreter.parseLine() |
+ | SUB    | Subtract first number by second number, push result to top of stack | `SUB 000 101` | No                      |
+ | MUL    | Multiply first number by second number, push result to top of stack | `MUL 000 101` | No                      |
+ | DIV    | Divide first number by second number, push result to top of stack   | `DIV 000 101` | No                      |
+ | NEG    | Perform a binary negate on top value, push result to top of stack   | `NEG 010`     | No                      |
 
 ## Pointer
 
-  | OPCODE | Definition                | Usage |
-  | ------ | ------------------------- | ----- |
-  | OPF    | Move the pointer forward  | `OPF`   |
-  | OPB    | Move the pointer backward | `OPB`   |
-  | OPL    | Move the pointer left     | `OPL`   |
-  | OPR    | Move the pointer right    | `OPR`   |
+  | OPCODE | Definition                | Usage | Implemented |
+  | ------ | ------------------------- | ----- | ----------- |
+  | OPF    | Move the pointer forward  | `OPF` | No          |
+  | OPB    | Move the pointer backward | `OPB` | No          |
+  | OPL    | Move the pointer left     | `OPL` | No          |
+  | OPR    | Move the pointer right    | `OPR` | No          |
 
 ## Rubik's Notation
 
-  | OPCODE | Definition                      | Usage    |
-  | ------ | ------------------------------- | -------- |
-  | MOV L  | Move left face clockwise        | `MOV L`  |
-  | MOV R  | Move right face clockwise       | `MOV R`  |
-  | MOV F  | Move front face clockwise       | `MOV F`  |
-  | MOV B  | Move back face clockwise        | `MOV B`  |
-  | MOV T  | Move top face clockwise         | `MOV T`  |
-  | MOV D  | Move bottom face clockwise      | `MOV D`  |
-  |        |                                 |          |
-  | MOV LN | Move left face counterclockwise | `MOV LN` |
-  | MOV RN | Move left face counterclockwise | `MOV RN` |
-  | MOV FN | Move left face counterclockwise | `MOV FN` |
-  | MOV BN | Move left face counterclockwise | `MOV BN` |
-  | MOV TN | Move left face counterclockwise | `MOV TN` |
-  | MOV DN | Move left face counterclockwise | `MOV DN` |
+  | OPCODE | Definition                      | Usage    | Implemented |
+  | ------ | ------------------------------- | -------- | ----------- |
+  | MOV L  | Move left face clockwise        | `MOV L`  | No          |
+  | MOV R  | Move right face clockwise       | `MOV R`  | No          |
+  | MOV F  | Move front face clockwise       | `MOV F`  | No          |
+  | MOV B  | Move back face clockwise        | `MOV B`  | No          |
+  | MOV T  | Move top face clockwise         | `MOV T`  | Cube.MOV()  |
+  | MOV D  | Move bottom face clockwise      | `MOV D`  | No          |
+  |        |                                 |          |             |
+  | MOV LN | Move left face counterclockwise | `MOV LN` | No          |
+  | MOV RN | Move left face counterclockwise | `MOV RN` | No          |
+  | MOV FN | Move left face counterclockwise | `MOV FN` | No          |
+  | MOV BN | Move left face counterclockwise | `MOV BN` | No          |
+  | MOV TN | Move left face counterclockwise | `MOV TN` | Cube.MOV()  |
+  | MOV DN | Move left face counterclockwise | `MOV DN` | No          |
 
 # Interpreter / Language Rules
 
@@ -112,7 +112,7 @@ VER 1.0
 This function checks if theres data on the current stack,
 prints the top value as ascii if there is any and skips
 the loop if the stack is empty. Easy way to print prestored
-variables
+words
 
 012 JUT 015 CID
 013 PRN
