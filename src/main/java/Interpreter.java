@@ -31,37 +31,11 @@ import java.util.List;
 
 public class Interpreter {
 
-// Math opcodes
-final static String OP_ADD = "ADD";
-final static String OP_SUB = "SUB";
-final static String OP_MUL = "MUL";
-final static String OP_DIV = "DIV";
-final static String OP_NEG = "NEG";
-
-// Rubiks movement opcodes
-final static String OP_MOV = "MOV";
-
-final static String OP_MOVL = "L";
-final static String OP_MOVR = "R";
-final static String OP_MOVF = "F";
-final static String OP_MOVB = "B";
-final static String OP_MOVT = "T";
-final static String OP_MOVD = "D";
-
-final static String OP_MOVLN = "LN";
-final static String OP_MOVRN = "RN";
-final static String OP_MOVFN = "FN";
-final static String op_MOVBN = "BN";
-final static String OP_MOVTN = "TN";
-final static String OP_MOVDN = "DN";
-
-// Pointer opcodes
-final static String OP_PNT = "PNT";
-
-final static String OP_PNTF = "F";
-final static String OP_PNTB = "B";
-final static String OP_PNTL = "L";
-final static String OP_PNTR = "R";
+// Generaal Functions
+final static String OP_EXT = "EXT";
+final static String OP_CID = "CID";
+final static String OP_JUT = "JUT";
+final static String OP_RET = "RET";
 
 // Stack opcodes
 final static String OP_PUS = "PUS";
@@ -76,11 +50,38 @@ final static String OP_PRN = "PRN";
 final static String OP_PRB = "PRB";
 final static String OP_PRD = "PRD";
 
-// Generaal Functions
-final static String OP_EXT = "EXT";
-final static String OP_CID = "CID";
-final static String OP_JUT = "JUT";
-final static String OP_RET = "RET";
+// Math opcodes
+final static String OP_ADD = "ADD";
+final static String OP_SUB = "SUB";
+final static String OP_MUL = "MUL";
+final static String OP_DIV = "DIV";
+final static String OP_NEG = "NEG";
+
+// Pointer opcodes
+final static String OP_PNT = "PNT";
+
+final static String OP_PNTF = "F";
+final static String OP_PNTB = "B";
+final static String OP_PNTL = "L";
+final static String OP_PNTR = "R";
+
+// Rubiks movement opcodes
+final static String OP_MOV = "MOV";
+
+final static String OP_MOVL = "L";
+final static String OP_MOVR = "R";
+final static String OP_MOVF = "F";
+final static String OP_MOVB = "B";
+final static String OP_MOVT = "T";
+final static String OP_MOVD = "D";
+
+final static String OP_MOVLN = "LN";
+final static String OP_MOVRN = "RN";
+final static String OP_MOVFN = "FN";
+final static String OP_MOVBN = "BN";
+final static String OP_MOVTN = "TN";
+final static String OP_MOVDN = "DN";
+
 
 // Regex patterns
 final static String CODELINE = "[0-9][0-9][0-9]";
@@ -94,6 +95,8 @@ public static int[] cell = new int[64];
 public static File file = new File("../../test/rpl/test.rpl"); // A file chosen by the user
 public static String[][] program = new String[999][256]; // The program to be translated
 public static String[][] refinedProgram = new String[999][256]; // The refined program, with only executable code in an array
+
+public static Cube cube = new Cube();
 
 public static void main(String[] args) {
         /* This will be uncommented for release
@@ -158,7 +161,21 @@ public static void parseLine(String[] program) {
         String cellTwo = "0010011011"; // 155
         if(program[0] != null) {
                 System.out.println("OP: " + program[1].toString());
-                if(program[1].toString().matches(OP_ADD)) {
+                String programOpt = program[1].toString();
+                if (programOpt.matches(OP_EXT)) { }
+                else if (programOpt.matches(OP_CID)) { }
+                else if (programOpt.matches(OP_JUT)) { }
+                else if (programOpt.matches(OP_RET)) { }
+                else if (programOpt.matches(OP_PUS)) { }
+                else if (programOpt.matches(OP_POP)) { }
+                else if (programOpt.matches(OP_POF)) { }
+                else if (programOpt.matches(OP_POB)) { }
+                else if (programOpt.matches(OP_POL)) { }
+                else if (programOpt.matches(OP_POR)) { }
+                else if (programOpt.matches(OP_PRN)) { }
+                else if (programOpt.matches(OP_PRB)) { }
+                else if (programOpt.matches(OP_PRD)) { }
+                else if (programOpt.matches(OP_ADD)) {
                         int cellValue = 0;
                         pLL.log(Level.INFO, "Matched OP_ADD");
                         if((program[2].toString().matches(CELL_SELECTOR) || program[2].toString().matches(BINARY_POSITIVE)) && (program[2].toString().matches(CELL_SELECTOR) || program[2].toString().matches(BINARY_POSITIVE))) {
@@ -166,10 +183,10 @@ public static void parseLine(String[] program) {
                                 // Typically we would grab the top value from these cells then send those values over
                                 // But for right now just testing the function so throwing some binary over
                                 if(program[2].toString().matches(CELL_SELECTOR)) {
-                                        cellOne = "0b" + Cube.getCell(program[2].toString());
+                                        cellOne = "0b" + Cube.getCellID(program[2].toString());
                                 } else { cellOne = "0b" + program[2].toString(); }
                                 if(program[3].toString().matches(CELL_SELECTOR)) {
-                                        cellTwo = "0b" + Cube.getCell(program[2].toString(); )
+                                        cellTwo = "0b" + Cube.getCellID(program[2].toString());
                                 } else { cellTwo = "0b" + program[2].toString(); }
                                 int cellOneInt = Integer.parseInt(cellOne.substring(2), 2);
                                 int cellTwoInt = Integer.parseInt(cellTwo.substring(2), 2);
@@ -178,7 +195,34 @@ public static void parseLine(String[] program) {
                                 pLL.log(Level.INFO, "Value is:\t" + cellValue);
                         } Cube.PUS(cellValue);
                 }
+                else if (programOpt.matches(OP_SUB)) { }
+                else if (programOpt.matches(OP_MUL)) { }
+                else if (programOpt.matches(OP_DIV)) { }
+                else if (programOpt.matches(OP_NEG)) { }
+                else if (programOpt.matches(OP_PNT)) {
+                        if (program[2].toString().matches(OP_PNTF)) { }
+                        else if (program[2].toString().matches(OP_PNTB)) { }
+                        else if (program[2].toString().matches(OP_PNTL)) { }
+                        else if (program[2].toString().matches(OP_PNTR)) { }
+                        else { pLL.log(Level.WARNING, "The given pointer direction is not a command reference."); }
+                } // FBLR
+                else if (programOpt.matches(OP_MOV)) {
+                        if (program[2].toString().matches(OP_MOVL)) { }
+                        else if (program[2].toString().matches(OP_MOVR)) { }
+                        else if (program[2].toString().matches(OP_MOVF)) { }
+                        else if (program[2].toString().matches(OP_MOVB)) { }
+                        else if (program[2].toString().matches(OP_MOVD)) { }
+                        else if (program[2].toString().matches(OP_MOVT)) { }
+                        else if (program[2].toString().matches(OP_MOVLN)) { }
+                        else if (program[2].toString().matches(OP_MOVRN)) { }
+                        else if (program[2].toString().matches(OP_MOVFN)) { }
+                        else if (program[2].toString().matches(OP_MOVBN)) { }
+                        else if (program[2].toString().matches(OP_MOVDN)) { }
+                        else if (program[2].toString().matches(OP_MOVTN)) { }
+                        else { pLL.log(Level.WARNING, "The given Rubik's movement is not a command reference."); }
+                }
+                else { pLL.log(Level.WARNING, "The given OPT is not a command reference."); }
         }
-}
 
+}
 } // End of file
