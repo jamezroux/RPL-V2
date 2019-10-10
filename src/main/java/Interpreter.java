@@ -162,19 +162,22 @@ public static void parseLine(String[] program) {
         if(program[0] != null) {
                 System.out.println("OP: " + program[1].toString());
                 String programOpt = program[1].toString();
-                if (programOpt.matches(OP_EXT)) { }
-                else if (programOpt.matches(OP_CID)) { }
-                else if (programOpt.matches(OP_JUT)) { }
-                else if (programOpt.matches(OP_RET)) { }
-                else if (programOpt.matches(OP_PUS)) { }
-                else if (programOpt.matches(OP_POP)) { }
-                else if (programOpt.matches(OP_POF)) { }
-                else if (programOpt.matches(OP_POB)) { }
-                else if (programOpt.matches(OP_POL)) { }
-                else if (programOpt.matches(OP_POR)) { }
-                else if (programOpt.matches(OP_PRN)) { }
-                else if (programOpt.matches(OP_PRB)) { }
-                else if (programOpt.matches(OP_PRD)) { }
+                if (programOpt.matches(OP_EXT)) {
+                        pLL.log(Level.INFO, "Received exit OP.");
+                        System.exit(0);
+                }
+                else if (programOpt.matches(OP_CID)) {}
+                else if (programOpt.matches(OP_JUT)) {}
+                else if (programOpt.matches(OP_RET)) {}
+                else if (programOpt.matches(OP_PUS)) {}
+                else if (programOpt.matches(OP_POP)) {}
+                else if (programOpt.matches(OP_POF)) {}
+                else if (programOpt.matches(OP_POB)) {}
+                else if (programOpt.matches(OP_POL)) {}
+                else if (programOpt.matches(OP_POR)) {}
+                else if (programOpt.matches(OP_PRN)) {}
+                else if (programOpt.matches(OP_PRB)) {}
+                else if (programOpt.matches(OP_PRD)) {}
                 else if (programOpt.matches(OP_ADD)) {
                         int cellValue = 0;
                         pLL.log(Level.INFO, "Matched OP_ADD");
@@ -183,10 +186,10 @@ public static void parseLine(String[] program) {
                                 // Typically we would grab the top value from these cells then send those values over
                                 // But for right now just testing the function so throwing some binary over
                                 if(program[2].toString().matches(CELL_SELECTOR)) {
-                                        cellOne = "0b" + Cube.getCellID(program[2].toString());
+                                        cellOne = "0b" + Cube.getCellByID(program[2].toString());
                                 } else { cellOne = "0b" + program[2].toString(); }
                                 if(program[3].toString().matches(CELL_SELECTOR)) {
-                                        cellTwo = "0b" + Cube.getCellID(program[2].toString());
+                                        cellTwo = "0b" + Cube.getCellByID(program[2].toString());
                                 } else { cellTwo = "0b" + program[2].toString(); }
                                 int cellOneInt = Integer.parseInt(cellOne.substring(2), 2);
                                 int cellTwoInt = Integer.parseInt(cellTwo.substring(2), 2);
@@ -195,10 +198,61 @@ public static void parseLine(String[] program) {
                                 pLL.log(Level.INFO, "Value is:\t" + cellValue);
                         } Cube.PUS(cellValue);
                 }
-                else if (programOpt.matches(OP_SUB)) { }
-                else if (programOpt.matches(OP_MUL)) { }
-                else if (programOpt.matches(OP_DIV)) { }
-                else if (programOpt.matches(OP_NEG)) { }
+                else if (programOpt.matches(OP_SUB)) {
+                        int cellValue = 0;
+                        pLL.log(Level.INFO, "Matched OP_SUB");
+                        if((program[2].toString().matches(CELL_SELECTOR) || program[2].toString().matches(BINARY_POSITIVE)) && (program[2].toString().matches(CELL_SELECTOR) || program[2].toString().matches(BINARY_POSITIVE))) {
+                                pLL.log(Level.INFO, "Strings match up");
+                                if(program[2].toString().matches(CELL_SELECTOR)) {
+                                        cellOne = "0b" + Cube.getCellByID(program[2].toString());
+                                } else { cellOne = "0b" + program[2].toString(); }
+                                if(program[3].toString().matches(CELL_SELECTOR)) {
+                                        cellTwo = "0b" + Cube.getCellByID(program[3].toString());
+                                } else { cellTwo = "0b" + program[3].toString(); }
+                                int cellOneInt = Integer.parseInt(cellOne.substring(2), 2);
+                                int cellTwoInt = Integer.parseInt(cellTwo.substring(2), 2);
+                                pLL.log(Level.INFO, "cellOne: " + cellOneInt + "\tcellTwo: " + cellTwoInt);
+                                cellValue = cellOneInt - cellTwoInt;
+                                pLL.log(Level.INFO, "Value is:\t" + cellValue);
+                        } Cube.PUS(cellValue);
+                }
+                else if (programOpt.matches(OP_MUL)) {
+                        int cellValue = 0;
+                        pLL.log(Level.INFO, "Matched OP_MUL");
+                        if((program[2].toString().matches(CELL_SELECTOR) || program[2].toString().matches(BINARY_POSITIVE)) && (program[2].toString().matches(CELL_SELECTOR) || program[2].toString().matches(BINARY_POSITIVE))) {
+                                pLL.log(Level.INFO, "Strings match up");
+                                if(program[2].toString().matches(CELL_SELECTOR)) {
+                                        cellOne = "0b" + Cube.getCellByID(program[2].toString());
+                                } else { cellOne = "0b" + program[2].toString(); }
+                                if(program[3].toString().matches(CELL_SELECTOR)) {
+                                        cellTwo = "0b" + Cube.getCellByID(program[3].toString());
+                                } else { cellTwo = "0b" + program[3].toString(); }
+                                int cellOneInt = Integer.parseInt(cellOne.substring(2), 2);
+                                int cellTwoInt = Integer.parseInt(cellTwo.substring(2), 2);
+                                pLL.log(Level.INFO, "cellOne: " + cellOneInt + "\tcellTwo: " + cellTwoInt);
+                                cellValue = cellOneInt * cellTwoInt;
+                                pLL.log(Level.INFO, "Value is:\t" + cellValue);
+                        } Cube.PUS(cellValue);
+                }
+                else if (programOpt.matches(OP_DIV)) {
+                        int cellValue = 0;
+                        pLL.log(Level.INFO, "Matched OP_SUB");
+                        if((program[2].toString().matches(CELL_SELECTOR) || program[2].toString().matches(BINARY_POSITIVE)) && (program[2].toString().matches(CELL_SELECTOR) || program[2].toString().matches(BINARY_POSITIVE))) {
+                                pLL.log(Level.INFO, "Strings match up");
+                                if(program[2].toString().matches(CELL_SELECTOR)) {
+                                        cellOne = "0b" + Cube.getCellByID(program[2].toString());
+                                } else { cellOne = "0b" + program[2].toString(); }
+                                if(program[3].toString().matches(CELL_SELECTOR)) {
+                                        cellTwo = "0b" + Cube.getCellByID(program[3].toString());
+                                } else { cellTwo = "0b" + program[3].toString(); }
+                                int cellOneInt = Integer.parseInt(cellOne.substring(2), 2);
+                                int cellTwoInt = Integer.parseInt(cellTwo.substring(2), 2);
+                                pLL.log(Level.INFO, "cellOne: " + cellOneInt + "\tcellTwo: " + cellTwoInt);
+                                cellValue = cellOneInt / cellTwoInt;
+                                pLL.log(Level.INFO, "Value is:\t" + cellValue);
+                        } Cube.PUS(cellValue);
+                }
+                else if (programOpt.matches(OP_NEG)) {}
                 else if (programOpt.matches(OP_PNT)) {
                         if (program[2].toString().matches(OP_PNTF)) { }
                         else if (program[2].toString().matches(OP_PNTB)) { }
