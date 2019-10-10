@@ -38,9 +38,9 @@
  | OPCODE | Definition                             | Usage                                      | Implemented             |
  | ------ | -------------------------------------- | ------------------------------------------ | ----------------------- |
  | ADD    | Add first number by second number, push result to top of stack      | `ADD 000 101` | Interpreter.parseLine() |
- | SUB    | Subtract first number by second number, push result to top of stack | `SUB 000 101` | No                      |
- | MUL    | Multiply first number by second number, push result to top of stack | `MUL 000 101` | No                      |
- | DIV    | Divide first number by second number, push result to top of stack   | `DIV 000 101` | No                      |
+ | SUB    | Subtract first number by second number, push result to top of stack | `SUB 000 101` | Interpreter.parseLine() |
+ | MUL    | Multiply first number by second number, push result to top of stack | `MUL 000 101` | Interpreter.parseLine() |
+ | DIV    | Divide first number by second number, push result to top of stack   | `DIV 000 101` | Interpreter.parseLine() |
  | NEG    | Perform a binary negate on top value, push result to top of stack   | `NEG 010`     | No                      |
 
 ## Pointer
