@@ -83,48 +83,102 @@ public static String[][] cube = new String[][] { {"TOP_0001", "TOP_0010", "TOP_0
                                                  {"RIGHT_0001", "RIGHT_0010", "RIGHT_0011", "RIGHT_0100"} };
 
 public static int[] side = new int[6];
-public static int[] face = new int[4];
+public static String[] face = new String[4];
 public static int[] cell = new int[64];
 
 // 0 = Top Left, 1 = Top Right, 2 = Bottom Left, 3 = Bottom Right
 public static int pointer = 0;
 
-
 public static void main(String[] args) {
         System.exit(0);
 }
-
 // General functions, these aren't usually called outside this class
+// Trying to rework the code to use getCubie() and getCubieData() rather than loadCube(), only two left to change are CID() and PUS()
 public static String[] loadCube() {
         // Initialize the face wih the top side
-        if(face[0].matches(null)) { face[0] = TOP_0001[0]; } else { face[0] = face[0]; }
-        if(face[1].matches(null)) { face[1] = TOP_0010[0]; } else { face[1] = face[1]; }
-        if(face[2].matches(null)) { face[2] = TOP_0011[0]; } else { face[2] = face[2]; }
-        if(face[3].matches(null)) { face[3] = TOP_0100[0]; } else { face[3] = face[3]; }
-        int side = 0;
-        // Gets the id for the cubie
-        if(face[pointer] < 5) { side = 0; }
-        else if(face[pointer] < 9) { side = 1; }
-        else if(face[pointer] < 13) { side = 2; }
-        else if(face[pointer] < 17) { side = 3; }
-        else if(face[pointer] < 21) { side = 4; }
-        else if(face[pointer] < 25) { side = 5; }
-        else { System.exit(0); }
-        return new String[] {Integer.toString(side), Integer.toString(pointer), Integer.toString(face[pointer])};
+        face[0] = cube[0][0];
+        face[1] = cube[0][1];
+        face[2] = cube[0][2];
+        face[3] = cube[0][3];
+
+        return face;
+}
+public static int[] getCubie(String reference) {
+        int[] cubie = new int[2];
+        if(reference.matches(null)) {
+                cubie[0] = 64;
+                cubie[1] = 64;
+                return cubie;
+        }
+        else if (reference.matches("TOP_0001")) { return TOP_0001; }
+        else if (reference.matches("TOP_0010")) { return TOP_0010; }
+        else if (reference.matches("TOP_0011")) { return TOP_0011; }
+        else if (reference.matches("TOP_0100")) { return TOP_0100; }
+        else if (reference.matches("BOTTOM_0001")) { return BOTTOM_0001; }
+        else if (reference.matches("BOTTOM_0010")) { return BOTTOM_0010; }
+        else if (reference.matches("BOTTOM_0011")) { return BOTTOM_0011; }
+        else if (reference.matches("BOTTOM_0100")) { return BOTTOM_0100; }
+        else if (reference.matches("FRONT_0001")) { return FRONT_0001; }
+        else if (reference.matches("FRONT_0010")) { return FRONT_0010; }
+        else if (reference.matches("FRONT_0011")) { return FRONT_0011; }
+        else if (reference.matches("FRONT_0100")) { return FRONT_0100; }
+        else if (reference.matches("BACK_0001")) { return BACK_0001; }
+        else if (reference.matches("BACK_0010")) { return BACK_0010; }
+        else if (reference.matches("BACK_0011")) { return BACK_0011; }
+        else if (reference.matches("BACK_0100")) { return BACK_0100; }
+        else if (reference.matches("LEFT_0001")) { return LEFT_0001; }
+        else if (reference.matches("LEFT_0010")) { return LEFT_0010; }
+        else if (reference.matches("LEFT_0011")) { return LEFT_0011; }
+        else if (reference.matches("LEFT_0100")) { return LEFT_0100; }
+        else if (reference.matches("RIGHT_0001")) { return RIGHT_0001; }
+        else if (reference.matches("RIGHT_0010")) { return RIGHT_0010; }
+        else if (reference.matches("RIGHT_0011")) { return RIGHT_0011; }
+        else if (reference.matches("RIGHT_0100")) { return RIGHT_0100; }
+}
+public static int[] getCubieData(String reference) {
+        int[] cubie = new int[2];
+        if(reference.matches(null)) {
+                cubie[0] = 64;
+                cubie[1] = 64;
+                return cubie;
+        }
+        else if (reference.matches("TOP_0001")) { return TOP_0001_DATA; }
+        else if (reference.matches("TOP_0010")) { return TOP_0010_DATA; }
+        else if (reference.matches("TOP_0011")) { return TOP_0011_DATA; }
+        else if (reference.matches("TOP_0100")) { return TOP_0100_DATA; }
+        else if (reference.matches("BOTTOM_0001")) { return BOTTOM_0001_DATA; }
+        else if (reference.matches("BOTTOM_0010")) { return BOTTOM_0010_DATA; }
+        else if (reference.matches("BOTTOM_0011")) { return BOTTOM_0011_DATA; }
+        else if (reference.matches("BOTTOM_0100")) { return BOTTOM_0100_DATA; }
+        else if (reference.matches("FRONT_0001")) { return FRONT_0001_DATA; }
+        else if (reference.matches("FRONT_0010")) { return FRONT_0010_DATA; }
+        else if (reference.matches("FRONT_0011")) { return FRONT_0011_DATA; }
+        else if (reference.matches("FRONT_0100")) { return FRONT_0100_DATA; }
+        else if (reference.matches("BACK_0001")) { return BACK_0001_DATA; }
+        else if (reference.matches("BACK_0010")) { return BACK_0010_DATA; }
+        else if (reference.matches("BACK_0011")) { return BACK_0011_DATA; }
+        else if (reference.matches("BACK_0100")) { return BACK_0100_DATA; }
+        else if (reference.matches("LEFT_0001")) { return LEFT_0001_DATA; }
+        else if (reference.matches("LEFT_0010")) { return LEFT_0010_DATA; }
+        else if (reference.matches("LEFT_0011")) { return LEFT_0011_DATA; }
+        else if (reference.matches("LEFT_0100")) { return LEFT_0100_DATA; }
+        else if (reference.matches("RIGHT_0001")) { return RIGHT_0001_DATA; }
+        else if (reference.matches("RIGHT_0010")) { return RIGHT_0010_DATA; }
+        else if (reference.matches("RIGHT_0011")) { return RIGHT_0011_DATA; }
+        else if (reference.matches("RIGHT_0100")) { return RIGHT_0100_DATA; }
 }
 public static boolean isCellFull() {           // Get
-        Cube self = new Cube();
-        String[] cubeLoc = Cube.loadCube();
+        int[] cubie = getCubieData(face[pointer]);
 
         for(int i = 0; i < 64; i++) {
-                if(cube[Integer.parseInt(cubeLoc[0])][Integer.parseInt(cubeLoc[1])][Integer.parseInt(cubeLoc[2])]) {
+                if(cubie[i] == 0) {
                         return false;
                 } else {
                         continue;
                 }
         } return true;
 }
-public static String getCellID(String cellCall) {
+public static String getCellByID(String cellCall) {
         if(cellCall.matches("0001")) {
                 return Cube.POP(face[0]);
         } else if(cellCall.matches("0010")) {
@@ -133,9 +187,11 @@ public static String getCellID(String cellCall) {
                 return Cube.POP(face[2]);
         } else if(cellCall.matches("0100")) {
                 return Cube.POP(face[3]);
-        } else { return "Nothing"; }
+        } else {
+                System.out.println("Error, this is not a cell id.");
+                System.exit(0);
+        }
 }
-
 // Rubiks Functions, these move around the arrays to build the cube
 public static void MOV(int direction) {
         switch(direction) {
@@ -174,6 +230,8 @@ public static void MOV(int direction) {
         }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // Stack Functions, these will usually be called directly from the interpreter
 public static void PUS(int cellValue) {
         if(!isCellFull()) {
@@ -182,10 +240,15 @@ public static void PUS(int cellValue) {
                 cube[Integer.parseInt(cubeLoc[0])][Integer.parseInt(cubeLoc[1])][Integer.parseInt(cubeLoc[2])] = cellValue;
         }
 }
-public static String POP(int cellPointer) {
-        Cube self = new Cube();
-        String[] cubeLoc = Cube.loadCube();
-        return Integer.toString(cube[Integer.parseInt(cubeLoc[0])][Integer.parseInt(cubeLoc[1])][cellPointer]);
+public static String POP(String pointer) {
+        int[] cubieData = getCubieData(face[pointer]);
+        int[] cubie = getCubie(face[pointer]);
+        int value = cubieData[cubieData.length-1];
+
+
+        return value;
+
+        return Integer.toString(cube[Integer.parseInt(cubeLoc[0])][Integer.parseInt(cubeLoc[1])][pointer]);
 }
 public static boolean CID(int cellPointer) {
         Cube self = new Cube();
@@ -194,4 +257,5 @@ public static boolean CID(int cellPointer) {
                 return false;
         } else { return true; }
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
